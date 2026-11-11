@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#10101c" />
+  <meta name="description" content="Meet Nandini's AI voice twin. Ask questions and hear her story." />
+  <title>Nandini | AI Voice Twin</title>
+  <style>
+    :root{--bg:#0b0b14;--panel:#141422;--panel2:#1a1a2b;--text:#f4f3fb;--muted:#a5a4b8;--accent:#a78bfa;--accent2:#6d5ce7;--line:rgba(255,255,255,.09);--green:#55d6a5}
+    *{box-sizing:border-box} body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -15%,#30245b 0%,transparent 48%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    .wrap{max-width:850px;margin:auto;padding:28px 18px 36px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:28px}.brand{display:flex;align-items:center;gap:11px}.logo{width:39px;height:39px;border-radius:13px;background:linear-gradient(135deg,#b69cff,#6651dc);display:grid;place-items:center;font-weight:800;color:#171126}.brand strong{display:block;font-size:14px;letter-spacing:.2px}.brand small{color:var(--muted);font-size:11px}.status{font-size:11px;color:#b8f2dc;border:1px solid rgba(85,214,165,.25);background:rgba(85,214,165,.08);padding:7px 10px;border-radius:30px;white-space:nowrap}
+    .hero{text-align:center;padding:14px 0 20px}.eyebrow{color:#c6b8ff;font-size:11px;text-transform:uppercase;letter-spacing:2px;font-weight:700}.hero h1{font-size:clamp(30px,6vw,48px);letter-spacing:-1.8px;margin:12px 0 9px}.hero p{color:var(--muted);max-width:520px;margin:0 auto;line-height:1.6;font-size:14px}
+    .voice-card{margin:24px auto 18px;max-width:610px;padding:26px 20px 22px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(145deg,rgba(32,29,55,.94),rgba(19,19,32,.96));box-shadow:0 22px 70px rgba(0,0,0,.28);text-align:center}
+    .orb-wrap{height:150px;display:grid;place-items:center;position:relative}.orb{height:112px;width:112px;border-radius:50%;background:radial-gradient(circle at 35% 28%,#e5d9ff 0%,#aa8cff 22%,#7056dd 57%,#33256e 100%);box-shadow:0 0 35px rgba(151,119,255,.45),inset -8px -10px 22px rgba(20,10,60,.35);display:grid;place-items:center;transition:transform .2s}.orb svg{width:38px;height:38px;fill:#fff}.orb.listening{animation:pulse 1.25s infinite}.orb.speaking{animation:speak .65s infinite alternate}@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(167,139,250,.3),0 0 35px rgba(151,119,255,.5)}50%{box-shadow:0 0 0 18px rgba(167,139,250,0),0 0 55px rgba(151,119,255,.75)}}@keyframes speak{to{transform:scale(1.07)}}
+    .voice-state{font-size:13px;color:#d8d3ed;margin:7px 0 17px;min-height:20px}.mic{border:0;border-radius:50px;padding:14px 25px;background:linear-gradient(110deg,#b59aff,#7560e8);color:#160f2b;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(117,96,232,.25)}.mic:disabled{opacity:.55;cursor:wait}.hint{font-size:11px;color:var(--muted);margin-top:13px}
+    .suggestions{max-width:690px;margin:22px auto}.suggestions h2{font-size:13px;color:#d8d5e8;font-weight:650;margin:0 0 12px}.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{border:1px solid var(--line);background:rgba(255,255,255,.035);color:#d6d2e8;padding:10px 13px;border-radius:30px;font-size:12px;cursor:pointer;transition:.15s}.chip:hover{border-color:#9c83f5;background:rgba(167,139,250,.1)}
+    .chat{max-width:690px;margin:0 auto;border:1px solid var(--line);border-radius:20px;background:rgba(20,20,34,.82);overflow:hidden}.chat-head{padding:14px 17px;border-bottom:1px solid var(--line);font-size:12px;color:#ded9f2;display:flex;justify-content:space-between}.chat-head span:last-child{color:var(--muted)}.messages{padding:16px;display:flex;flex-direction:column;gap:13px;max-height:360px;overflow-y:auto;min-height:80px}.empty{text-align:center;color:var(--muted);font-size:12px;padding:18px}.msg{max-width:88%;padding:12px 14px;border-radius:15px;font-size:13px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}.msg.user{align-self:flex-end;background:#44377c;color:#fff;border-bottom-right-radius:5px}.msg.bot{align-self:flex-start;background:#242337;color:#eeeafa;border:1px solid rgba(255,255,255,.05);border-bottom-left-radius:5px}.msg small{display:block;color:#b9addf;font-size:10px;margin-bottom:4px}.composer{display:flex;gap:9px;padding:12px;border-top:1px solid var(--line)}.composer input{flex:1;min-width:0;background:#0e0e19;border:1px solid var(--line);border-radius:12px;padding:13px;color:var(--text);outline:none;font-size:13px}.composer input:focus{border-color:#8f78e9}.send{border:0;border-radius:12px;padding:0 17px;background:#7965e8;color:white;font-weight:700;cursor:pointer}.tools{display:flex;justify-content:flex-end;gap:8px;margin:9px 0 0}.tool{border:1px solid var(--line);background:transparent;color:var(--muted);font-size:11px;padding:7px 10px;border-radius:9px;cursor:pointer}.tool:hover{color:white;border-color:#9c83f5}.foot{text-align:center;color:#77758c;font-size:10px;margin-top:24px;line-height:1.6}
+    @media(max-width:520px){.wrap{padding:19px 13px 28px}.top{margin-bottom:20px}.voice-card{padding:21px 14px}.messages{max-height:300px}.msg{max-width:94%}.status{font-size:10px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="top"><div class="brand"><div class="logo">N</div><div><strong>NANDINI AI</strong><small>Personal voice twin</small></div></div><div class="status">● Ready to talk</div></header>
+    <section class="hero"><div class="eyebrow">A little introduction, powered by AI</div><h1>Get to know <span style="color:#b9a5ff">Nandini.</span></h1><p>Ask me about my journey, strengths, ambitions, or the way I approach challenges. You can speak naturally or type your question.</p></section>
+    <section class="voice-card" aria-label="Voice assistant"><div class="orb-wrap"><div class="orb" id="orb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Zm5-3a1 1 0 0 0-2 0 3 3 0 0 1-6 0 1 1 0 0 0-2 0 5 5 0 0 0 4 4.9V19H8a1 1 0 0 0 0 2h8a1 1 0 0 0 0-2h-3v-3.1a5 5 0 0 0 4-4.9Z"/></svg></div></div><div class="voice-state" id="voiceState">Tap the microphone and ask me anything.</div><button class="mic" id="micBtn" type="button">🎙 Start speaking</button><div class="hint">For voice input, use Chrome and allow microphone access.</div></section>
+    <section class="suggestions"><h2>Not sure what to ask? Try one of these</h2><div class="chips"><button class="chip">Tell me about your life story</button><button class="chip">What's your #1 superpower?</button><button class="chip">What are your top 3 growth areas?</button><button class="chip">What misconception do coworkers have about you?</button><button class="chip">How do you push your boundaries?</button></div></section>
+    <section class="chat"><div class="chat-head"><span>Conversation</span><span id="modeLabel">Personal AI assistant</span></div><div class="messages" id="messages"><div class="empty" id="empty">Your conversation will appear here.</div></div><form class="composer" id="chatForm"><input id="question" maxlength="1500" autocomplete="off" placeholder="Type your question here..." aria-label="Your question"/><button class="send" id="sendBtn" type="submit">Send</button></form></section>
+    <div class="tools"><button class="tool" id="muteBtn" type="button">🔊 Voice on</button><button class="tool" id="clearBtn" type="button">Clear conversation</button></div>
+    <footer class="foot">This is an AI-powered representation of Nandini's professional story. Responses are generated from the information provided and may not cover every personal detail.</footer>
+  </main>
+<script>
+  const $ = (id) => document.getElementById(id);
+  const messagesEl = $('messages'), questionEl = $('question'), micBtn = $('micBtn'), orb = $('orb'), voiceState = $('voiceState');
+  let history = [], recognition = null, listening = false, busy = false, muted = false;
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  function setState(text, mode='') { voiceState.textContent = text; orb.classList.remove('listening','speaking'); if(mode) orb.classList.add(mode); }
+  function addMessage(role, text) {
+    const empty = $('empty'); if(empty) empty.remove();
+    const bubble = document.createElement('div'); bubble.className = `msg ${role}`;
+    const label = document.createElement('small'); label.textContent = role === 'user' ? 'YOU' : 'NANDINI';
+    const content = document.createElement('div'); content.textContent = text;
+    bubble.append(label, content); messagesEl.appendChild(bubble); messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+  function speak(text) {
+    if(muted || !('speechSynthesis' in window)) { setState('Your answer is ready.'); return; }
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text); utterance.lang = 'en-IN'; utterance.rate = 0.96; utterance.pitch = 1.03;
+    const voices = window.speechSynthesis.getVoices();
+    const preferred = voices.find(v => v.lang === 'en-IN') || voices.find(v => v.lang.startsWith('en'));
+    if(preferred) utterance.voice = preferred;
+    utterance.onstart = () => setState('Speaking...', 'speaking');
+    utterance.onend = () => setState('Your turn. Ask me another question.');
+    utterance.onerror = () => setState('Answer ready. Your browser could not play the voice.');
+    window.speechSynthesis.speak(utterance);
+  }
+  async function ask(question) {
+    question = question.trim(); if(!question || busy) return;
+    busy = true; $('sendBtn').disabled = true; micBtn.disabled = true;
+    addMessage('user', question); questionEl.value = ''; setState('Thinking about that...');
+    try {
+      const res = await fetch('/api/chat', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:question, history})});
+      if(!res.ok) throw new Error('The server could not process that question.');
+      const data = await res.json();
+      addMessage('bot', data.reply); history.push({role:'user',content:question},{role:'assistant',content:data.reply}); history = history.slice(-10);
+      $('modeLabel').textContent = data.mode === 'ai' ? 'AI response' : 'Demo response';
+      speak(data.reply);
+    } catch(err) { addMessage('bot', 'Sorry, I could not connect just now. Please try again in a moment.'); setState('Connection issue. Please try again.'); }
+    finally { busy = false; $('sendBtn').disabled = false; micBtn.disabled = false; }
+  }
+  $('chatForm').addEventListener('submit', e => {e.preventDefault(); ask(questionEl.value);});
+  document.querySelectorAll('.chip').forEach(btn => btn.addEventListener('click', () => ask(btn.textContent)));
+  $('muteBtn').addEventListener('click', () => { muted = !muted; $('muteBtn').textContent = muted ? '🔇 Voice off' : '🔊 Voice on'; if(muted) window.speechSynthesis?.cancel(); });
+  $('clearBtn').addEventListener('click', () => {history=[]; messagesEl.innerHTML='<div class="empty" id="empty">Your conversation will appear here.</div>'; window.speechSynthesis?.cancel(); setState('Conversation cleared. Ask me anything.');});
+
+  if(SpeechRecognition) {
+    recognition = new SpeechRecognition(); recognition.lang = 'en-IN'; recognition.interimResults = false; recognition.maxAlternatives = 1;
+    recognition.onstart = () => {listening=true; micBtn.textContent='Listening... tap to stop'; setState('I’m listening. Go ahead.', 'listening');};
+    recognition.onresult = e => {const transcript=e.results[0][0].transcript; questionEl.value=transcript; ask(transcript);};
+    recognition.onerror = e => {setState(e.error === 'not-allowed' ? 'Microphone permission was blocked. You can type instead.' : 'I couldn’t hear that clearly. Please try again.');};
+    recognition.onend = () => {listening=false; micBtn.textContent='🎙 Start speaking'; if(!busy && !window.speechSynthesis?.speaking) orb.classList.remove('listening');};
+    micBtn.addEventListener('click', () => {if(listening) recognition.stop(); else {try{recognition.start();}catch(e){setState('Please wait a moment and try again.');}}});
+  } else {
+    micBtn.addEventListener('click', () => setState('Voice input is not supported in this browser. Please use Chrome or type your question below.'));
+    micBtn.textContent='🎙 Voice input unavailable';
+  }
+</script>
+</body>
+</html>
